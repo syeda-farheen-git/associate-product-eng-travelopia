@@ -39,7 +39,7 @@ describe('FlightBoard Component', () => {
   });
 
   it('should render correct column names', async () => {
-    axios.get.mockResolvedValue({ data: mockFlightData });
+    (axios.get as jest.Mock).mockResolvedValue({ data: mockFlightData });
 
     render(
       <Router>
@@ -60,7 +60,7 @@ describe('FlightBoard Component', () => {
   });
 
   it('should render the correct flight data', async () => {
-    axios.get.mockResolvedValue({ data: mockFlightData });
+    (axios.get as jest.Mock).mockResolvedValue({ data: mockFlightData });
 
     render(
       <Router>
@@ -84,7 +84,7 @@ describe('FlightBoard Component', () => {
   });
 
   it('should show loading text when fetching data', async () => {
-    axios.get.mockResolvedValue({ data: mockFlightData });
+    (axios.get as jest.Mock).mockResolvedValue({ data: mockFlightData });
 
     render(
       <Router>
@@ -97,7 +97,7 @@ describe('FlightBoard Component', () => {
   });
 
   it('should show an error message when API fails (404)', async () => {
-    axios.get.mockRejectedValue({
+    (axios.get as jest.Mock).mockRejectedValue({
       response: { status: 404, statusText: 'Not Found' },
     });
 
@@ -112,7 +112,7 @@ describe('FlightBoard Component', () => {
   });
 
   it('should show an error message when API fails (500)', async () => {
-    axios.get.mockRejectedValue({
+    (axios.get as jest.Mock).mockRejectedValue({
       response: { status: 500, statusText: 'Internal Server Error' },
     });
 
@@ -127,7 +127,7 @@ describe('FlightBoard Component', () => {
   });
 
   it('should show a network error message when there is no response', async () => {
-    axios.get.mockRejectedValue({ request: {} });
+    (axios.get as jest.Mock).mockRejectedValue({ request: {} });
 
     render(
       <Router>
@@ -140,7 +140,7 @@ describe('FlightBoard Component', () => {
   });
 
   it('should show error when there is a general error', async () => {
-    axios.get.mockRejectedValue(new Error('General Error'));
+    (axios.get as jest.Mock).mockRejectedValue(new Error('General Error'));
 
     render(
       <Router>
@@ -153,7 +153,7 @@ describe('FlightBoard Component', () => {
   });
 
   it('should show no flights available message when the flight list is empty', async () => {
-    axios.get.mockResolvedValue({ data: { flights: [] } });
+    (axios.get as jest.Mock).mockResolvedValue({ data: { flights: [] } });
 
     render(
       <Router>
